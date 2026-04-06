@@ -3,6 +3,7 @@ import Grid from './grid'
 
 const ROWS = 10
 const COLS = 10
+const BACKEND = 'https://neurogrid-production-197d.up.railway.app'
 
 function createGrid() {
   return Array.from({ length: ROWS }, () => Array(COLS).fill('empty'))
@@ -93,7 +94,7 @@ function App() {
     let nr, nc
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/ai-move', {
+      const res = await fetch('${BACKEND}/ai-move', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -183,7 +184,7 @@ function App() {
             direction: e.key,
           }
 
-          fetch('http://127.0.0.1:5000/move', {
+          fetch('${BACKEND}/move', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(moveData)
